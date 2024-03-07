@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import cmd
+import sys
 
 
 class HBNBCommand(cmd.Cmd):
@@ -13,8 +14,13 @@ class HBNBCommand(cmd.Cmd):
     
     def do_EOF(self, arg):
         """Another option to the exit the console"""
+        print()
         return True
     
+    #def do_help(self, arg):
+        #"""Help method to print available commands"""
+        #cmd.Cmd.do_help(self, arg)
+
     def help_quit(self):
         """The help documentation for quitting the console """
         print("Quit command to exit the program")
@@ -30,4 +36,4 @@ class HBNBCommand(cmd.Cmd):
     
     
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()  
+        HBNBCommand().cmdloop()  
