@@ -42,9 +42,9 @@ class FileStorage:
                 try:
                     f_cont = f.read()
                     obj_dict = json.loads(f_cont)
-                    obj_dict = {k: self.classes()\
-                            [v["__class__"]](**v)\
-                            for k, v in obj_dict.items()}
+                    obj_dict = {k: self.classes()
+                                [v["__class__"]](**v)
+                                for k, v in obj_dict.items()}
                     FileStorage.__objects = obj_dict
                 except Exception as e:
                     pass

@@ -104,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     del all_instances[key]
                     storage.save
-    
+
     def do_all(self, arg):
         """
             Prints all string representation of all instances
@@ -120,6 +120,7 @@ class HBNBCommand(cmd.Cmd):
                 if instance.__class__.__name__ == args[0]:
                     instances.append(str(instance))
             print(instances)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
