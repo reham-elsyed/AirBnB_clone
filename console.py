@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """This is our console for AirBnB project"""
-
 import cmd
 import sys
 from models import storage
@@ -12,93 +11,100 @@ from models.review import Review
 from models.user import User
 from models.state import State
 
+
 class HBNBCommand(cmd.Cmd):
     """the entry point of the command interpreter"""
-    
+
     prompt = "(hbnb) "
 
-    used_classes = {"BaseModel", "Amenity", "City", "Place", "Review", "User", "State"}
-    
+    used_classes = {"BaseModel": BaseModel,
+                    "Amenity": Amenity,
+                    "City": City,
+                    "Place": Place,
+                    "Review": Review,
+                    "User": User,
+                    "State": State}
+
     def do_quit(self, arg):
         """Quit the console"""
         return True
-    
+
     def do_EOF(self, arg):
         """Another option to the exit the console"""
         print()
         return True
-    
-    # def do_help(self, arg):
-        #"""Help method to print available commands"""
-        #cmd.Cmd.do_help(self, arg)
 
     def help_quit(self):
         """The help documentation for quitting the console """
         print("Quit command to exit the program")
-        
+
     def help_EOF(self):
         """The help documentation for EOF"""
-        print("EOF command to exit the program")    
+        print("EOF command to exit the program")
 
     def emptyline(self):
         """An empty line or ENTER will execute nothing """
         pass
-    
-    # def default(self, arg):
-    
-    
+
+    # def default(self, arg)
+
     def do_create(self, arg):
         """create a new instance of BaseModel"""
-       
-        if arg == "" or arg is None:
+
+        args = arg.split()
+        if len(args) == 0 or arg is None:
             print("** class name missing **")
         else:
-            arg1 = arg.split(" ")
-            name_class = arg1[0]
-            if name_class not in HBNBCommand.used_classes:
+            instance_name = args[0]
+            if instance_name in self.used_classes:
+                created_instance = self.used_classes.get(args[0])()
+                print(created_instance.id)
+            else:
                 print("** class doesn't exist **")
-                return
-            
-        new_instance = storage.classes()name_class
-        new_instance.save()
-        print(new_instance.id)
-           
-           
+        storage.save()
+
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
-        if arg == "" or arg is None:
+        """
+            Prints the string representation of an
+            instance based on the class name and id
+        """
+        args = arg.split()
+        if len(args) == 0:
             print("** class name missing **")
-        else:
-            arg2 = arg.split(" ")
-            if arg2[0] not in HBNBCommand.used_classes:
-                print("** class doesn't exist **")
-                return
-            elif len(arg2) < 2:
+        elif args[0] in self.used_classes:
+            if len(args) < 2:
                 print("** instance id missing **")
             else:
-                inst_id = arg2[1]
-                key = "{}.{}".format(arg2[0], inst_id)
-                if key not in storage.all():
-                    print("** no instance found **")
-                else:
+                inst_id = args[1]
+                key = "{}.{}".format(args[0], inst_id)
+                if key in storage.all():
                     print(storage.all()[key])
-        
+                else:
+                    print("** no instance found **")
+        else:
+            print("** class doesn't exist **")
+
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
         if arg == "" or arg is None:
             print("** class name missing **")
         else:
-            arg1 = arg.split(" ")
+            arg1 = arg.split()
             name_class = arg1[0]
-            if name_class not in HBNBCommand.used_classes:
+            if name_class not in self.used_classes:
                 print("** class doesn't exist **")
-                return
             elif len(arg1) < 2:
                 print("** instance id missing **")
             else:
-    
-    
-    
-    
+                inst_id = arg1[1]
+                key = "{}.{}".format(arg1[0], inst_id)
+                all_instances = storage.all()
+                if key not in all_instances:
+                    print("** no instance found **")
+                else:
+                    del all_instances[key]
+                    storage.save
+
+
 if __name__ == '__main__':
-        HBNBCommand().cmdloop()  
+    HBNBCommand().cmdloop()

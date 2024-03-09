@@ -24,7 +24,8 @@ class FileStorage:
 
     def save(self):
         """
-            Method to serialize dictionary of data, use to_dict method to return format of dict
+            Method to serialize dictionary of data,
+            use to_dict method to return format of dict
         """
         obj_dict = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
         with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
@@ -33,36 +34,37 @@ class FileStorage:
     def reload(self):
         """
             method to deserialize json dict to python object.
-            repopulate the objects attribute with k,v pairs after deserializing json
+            repopulate the objects attribute with
+            k,v pairs after deserializing json
         """
         if isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 try:
                     f_cont = f.read()
                     obj_dict = json.loads(f_cont)
-                    obj_dict = {k: self.classes() [v["__class__"]] (**v) for k, v in obj_dict.items()}
+                    obj_dict = {
+                            k: self.classes()[v["__class__"]](**v)
+                            for k, v in obj_dict.items()}
                     FileStorage.__objects = obj_dict
                 except:
                     pass
-
 
     def classes(self):
         from models.base_model import BaseModel
         from models.user import User
         from models.state import State
-        from  models.city import City
+        from models.city import City
         from models.amenity import Amenity
         from models.place import Place
         from models.review import Review
 
-
         classes = {
-                "BaseModel" : BaseModel,
-                "User" : User,
-                "State" : State,
-                "City" : City,
-                "Aminety" : Amenity,
-                "Place" : Place,
-                "Review" : Review
+                "BaseModel": BiaseModel,
+                "User": User,
+                "State": State,
+                "City": City,
+                "Aminety": Amenity,
+                "Place": Place,
+                "Review": Review
                 }
         return classes
