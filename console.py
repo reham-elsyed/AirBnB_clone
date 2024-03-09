@@ -104,7 +104,22 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     del all_instances[key]
                     storage.save
-
+    
+    def do_all(self, arg):
+        """
+            Prints all string representation of all instances
+            based or not on the class name.
+        """
+        args = arg.split()
+        if args[0] not in self.used_classes:
+            print("** class doesn't exist **")
+        else:
+            all_instances = storage.all().values()
+            instances = []
+            for instance in all_instances:
+                if instance.__class__.__name__ == args[0]:
+                    instances.append(str(instance))
+            print(instances)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

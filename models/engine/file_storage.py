@@ -42,11 +42,11 @@ class FileStorage:
                 try:
                     f_cont = f.read()
                     obj_dict = json.loads(f_cont)
-                    obj_dict = {
-                            k: self.classes()[v["__class__"]](**v)
+                    obj_dict = {k: self.classes()\
+                            [v["__class__"]](**v)\
                             for k, v in obj_dict.items()}
                     FileStorage.__objects = obj_dict
-                except:
+                except Exception as e:
                     pass
 
     def classes(self):
@@ -59,7 +59,7 @@ class FileStorage:
         from models.review import Review
 
         classes = {
-                "BaseModel": BiaseModel,
+                "BaseModel": BaseModel,
                 "User": User,
                 "State": State,
                 "City": City,
