@@ -150,7 +150,8 @@ class HBNBCommand(cmd.Cmd):
                     except ValueError:
                         print("** invalid value type **")
                 else:
-                    print("** attribute does not exist **")
+                    setattr(instances[key], args[2], args[3])
+                    instances[key].save()
 
 
 if __name__ == '__main__':
