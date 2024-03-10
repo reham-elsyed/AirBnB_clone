@@ -107,14 +107,14 @@ class TestBaseModel_save(unittest.TestCase):
         except IOError:
             pass
 
-    def test_one_save(self):
+    def test_onesave(self):
         bm = BaseModel()
         sleep(0.05)
         first_updated_at = bm.updated_at
         bm.save()
         self.assertLess(first_updated_at, bm.updated_at)
 
-    def test_two_saves(self):
+    def test_twosaves(self):
         bm = BaseModel()
         sleep(0.05)
         first_updated_at = bm.updated_at
@@ -125,7 +125,7 @@ class TestBaseModel_save(unittest.TestCase):
         bm.save()
         self.assertLess(second_updated_at, bm.updated_at)
 
-    def test_save_with_arg(self):
+    def test_savewith_arg(self):
         bm = BaseModel()
         with self.assertRaises(TypeError):
             bm.save(None)

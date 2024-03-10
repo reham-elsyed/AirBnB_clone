@@ -41,7 +41,7 @@ class TestFileStorage_instancd(unittest.TestCase):
 
 
 class TestFileStorage_methods(unittest.TestCase):
-    """Unittests for testing methods of the FileStorage class."""
+    """Unittests for testing methodsof theFieStorage class."""
 
     @classmethod
     def setUp(self):

@@ -134,12 +134,7 @@ class TestUser_save(unittest.TestCase):
             us.save(None)
 
     def test_save_updates_file(self):
-        us = User
-
-
-
-
-        ()
+        us = User()
         us.save()
         usid = "User." + us.id
         with open("file.json", "r") as f:
