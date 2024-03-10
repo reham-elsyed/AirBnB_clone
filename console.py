@@ -141,7 +141,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             else:
                 instance = instances[key]
-                if hasattr(instance, args[2]):
+                """if hasattr(instance, args[2]):
                     attr_type = type(getattr(instance, args[2]))
                     try:
                         cast_value = attr_type(args[3])
@@ -150,7 +150,9 @@ class HBNBCommand(cmd.Cmd):
                     except ValueError:
                         print("** invalid value type **")
                 else:
-                    print("** attribute does not exist **")
+                """
+                setattr(instances[key], args[2], args[3])
+                instances[key].save()
 
 
 if __name__ == '__main__':
