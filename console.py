@@ -149,9 +149,10 @@ class HBNBCommand(cmd.Cmd):
                         instance.save()
                     except ValueError:
                         print("** invalid value type **")
-                """else:
-                    setattr(instances[key], args[2], args[3])
-                    instances[key].save()
+                else:
+                """
+                setattr(instances[key], args[2], args[3])
+                instances[key].save()
 
 
 if __name__ == '__main__':
