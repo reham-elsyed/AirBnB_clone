@@ -16,3 +16,4 @@ The console:
     2- manage (create, update, destroy, etc) 3- objects via a console / command 
     4- interpreter
     5- store and persist objects to a file (JSON file)
+forked
